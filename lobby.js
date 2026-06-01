@@ -25,6 +25,11 @@ const leaderboardMockData = {
         { name: 'PixelKing', avatar: '🕹️', score: 100 },
         { name: 'MinesWrecker', avatar: '🦊', score: 100 }
     ],
+    catchstar: [
+        { name: 'StarHunter', avatar: '⭐', score: 28 },
+        { name: 'QuickFingers', avatar: '🚀', score: 21 },
+        { name: 'ClickMaster', avatar: '🤖', score: 17 }
+    ],
     oczko: [
         { name: 'CasinoRoyale', avatar: '🐱', score: 210 },
         { name: 'BlackjackPro', avatar: '🤖', score: 180 },
@@ -34,11 +39,6 @@ const leaderboardMockData = {
         { name: 'RedOrBlack', avatar: '🚀', score: 500 },
         { name: 'WheelSpinner', avatar: '👾', score: 350 },
         { name: 'Rohan', avatar: '🕹️', score: 200 }
-    ],
-    catchstar: [
-        { name: 'SpeedStar', avatar: '🚀', score: 54 },
-        { name: 'NeonFingers', avatar: '👾', score: 45 },
-        { name: 'PixelRush', avatar: '🕹️', score: 39 }
     ]
 };
 

@@ -468,18 +468,6 @@ h1.retro-title {
     background: radial-gradient(circle, rgba(0, 243, 255, 0.2) 0%, transparent 70%);
 }
 
-.game-card.green-card {
-    border-color: var(--neon-green);
-}
-
-.game-card.green-card .game-banner {
-    background: linear-gradient(45deg, #0b2d15 0%, #102a23 100%);
-}
-
-.game-card.green-card .game-banner::after {
-    background: radial-gradient(circle, rgba(57, 255, 20, 0.2) 0%, transparent 70%);
-}
-
 .game-card.yellow-card {
     border-color: var(--neon-yellow);
 }
@@ -539,12 +527,6 @@ h1.retro-title {
     background: rgba(0, 243, 255, 0.12);
     border: 1px solid var(--neon-cyan);
     color: var(--neon-cyan);
-}
-
-.tag-green {
-    background: rgba(57, 255, 20, 0.12);
-    border: 1px solid var(--neon-green);
-    color: var(--neon-green);
 }
 
 .tag-purple {

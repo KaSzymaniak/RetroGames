@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <!-- Dodanie ikon FontAwesome do interfejsu -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <div class="container">
         <!-- Header -->
@@ -16,15 +18,16 @@
                 <h1 class="retro-title">Retro Arcade</h1>
             </div>
             <div class="subtitle">Virtual Games Lobby</div>
-            <div class="insert-coin"><i class="fa-solid fa-gamepad"></i> INSERT COIN TO PLAY <i class="fa-solid fa-gamepad"></i></div>
+            <div class="insert-coin"><i class="fa-solid fa-gamepad"></i> INSERT COIN TO PLAY <i
+                    class="fa-solid fa-gamepad"></i></div>
         </header>
 
         <!-- Dashboard Grid -->
         <div class="dashboard-grid">
-            
+
             <!-- Sidebar -->
             <aside class="sidebar">
-                
+
                 <!-- Player Profile Panel -->
                 <div class="glass-panel" id="profile-panel">
                     <h2 class="panel-title purple"><i class="fa-solid fa-user-astronaut"></i> Profil Gracza</h2>
@@ -37,12 +40,13 @@
                             <span class="avatar-opt" data-avatar="🦊">🦊</span>
                             <span class="avatar-opt" data-avatar="🐱">🐱</span>
                         </div>
-                        
+
                         <div class="nickname-input-group">
                             <label for="nickname">Twój Pseudonim</label>
-                            <input type="text" id="nickname" class="nickname-input" placeholder="Wpisz swój nick..." maxlength="15">
+                            <input type="text" id="nickname" class="nickname-input" placeholder="Wpisz swój nick..."
+                                maxlength="15">
                         </div>
-                        
+
                         <button id="save-profile-btn" class="save-btn">Zapisz Profil</button>
                     </div>
                 </div>
@@ -60,7 +64,7 @@
                         </div>
                         <div class="status-row">
                             <span class="status-label">Aktywne Gry:</span>
-                            <span class="status-value text-cyan" id="status-games-count">2 / 4</span>
+                            <span class="status-value text-cyan" id="status-games-count">2 / 3</span>
                         </div>
                         <div class="status-row">
                             <span class="status-label">Czas Systemu:</span>
@@ -77,18 +81,20 @@
 
             <!-- Main Content Area -->
             <main class="main-content">
-                
+
                 <!-- Game Search Bar -->
                 <div class="search-container">
                     <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    <input type="text" id="game-search" class="search-input" placeholder="Wyszukaj grę w salonie gier...">
+                    <input type="text" id="game-search" class="search-input"
+                        placeholder="Wyszukaj grę w salonie gier...">
                 </div>
 
                 <!-- Games Grid -->
                 <div class="games-grid" id="games-container">
-                    
+
                     <!-- Game: Saper -->
-                    <a href="games/saper/saper.html" class="game-card cyan-card" data-title="saper" data-genre="logic,classic">
+                    <a href="gry/saper/saper.html" class="game-card cyan-card" data-title="saper"
+                        data-genre="logic,classic">
                         <div class="game-banner">💣</div>
                         <div class="game-body">
                             <div class="game-title">Saper (Minesweeper)</div>
@@ -96,23 +102,8 @@
                                 <span class="tag tag-cyan">Logiczna</span>
                                 <span class="tag tag-purple">Klasyk</span>
                             </div>
-                            <p class="game-desc">Rozbrajaj miny na planszy, używając dedukcji. Pamiętaj, aby nie kliknąć w bombę! Zdobądź 100 pkt za wygraną.</p>
-                            <div class="game-footer">
-                                <span class="play-action">GRAJ TERAZ <i class="fa-solid fa-circle-play"></i></span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Game: Catch Star -->
-                    <a href="games/catchstar.html" class="game-card green-card" data-title="łap gwiazdkę catch star" data-genre="arcade,skill">
-                        <div class="game-banner">⭐</div>
-                        <div class="game-body">
-                            <div class="game-title">Łap Gwiazdkę</div>
-                            <div class="game-tags">
-                                <span class="tag tag-green">Arcade</span>
-                                <span class="tag tag-cyan">Refleks</span>
-                            </div>
-                            <p class="game-desc">Kliknij szybko poruszającą się gwiazdkę, aby zdobyć jak najwięcej punktów w 30 sekund. Idealna gra na sprawdzenie refleksu.</p>
+                            <p class="game-desc">Rozbrajaj miny na planszy, używając dedukcji. Pamiętaj, aby nie kliknąć
+                                w bombę! Zdobądź 100 pkt za wygraną.</p>
                             <div class="game-footer">
                                 <span class="play-action">GRAJ TERAZ <i class="fa-solid fa-circle-play"></i></span>
                             </div>
@@ -120,7 +111,9 @@
                     </a>
 
                     <!-- Game: Oczko -->
-                    <a href="#" class="game-card pink-card disabled-card" data-title="oczko blackjack" data-genre="cards,classic" onclick="event.preventDefault(); alert('Gra Oczko już wkrótce w naszym salonie!');">
+                    <a href="#" class="game-card pink-card disabled-card" data-title="oczko blackjack"
+                        data-genre="cards,classic"
+                        onclick="event.preventDefault(); alert('Gra Oczko już wkrótce w naszym salonie!');">
                         <div class="game-banner">🃏</div>
                         <div class="game-body">
                             <div class="game-title">Oczko (Blackjack)</div>
@@ -128,7 +121,8 @@
                                 <span class="tag tag-pink">Karciana</span>
                                 <span class="tag tag-purple">Klasyk</span>
                             </div>
-                            <p class="game-desc">Zbliż się jak najbliżej 21 punktów, ale nie przekraczaj limitu. Pokonaj krupiera w tej pasjonującej grze karcianej.</p>
+                            <p class="game-desc">Zbliż się jak najbliżej 21 punktów, ale nie przekraczaj limitu. Pokonaj
+                                krupiera w tej pasjonującej grze karcianej.</p>
                             <div class="game-footer">
                                 <span class="game-status-coming">COMING SOON...</span>
                             </div>
@@ -136,7 +130,9 @@
                     </a>
 
                     <!-- Game: Ruletka -->
-                    <a href="#" class="game-card yellow-card disabled-card" data-title="ruletka casino" data-genre="luck" onclick="event.preventDefault(); alert('Gra Ruletka już wkrótce w naszym salonie!');">
+                    <a href="#" class="game-card yellow-card disabled-card" data-title="ruletka casino"
+                        data-genre="luck"
+                        onclick="event.preventDefault(); alert('Gra Ruletka już wkrótce w naszym salonie!');">
                         <div class="game-banner">🎡</div>
                         <div class="game-body">
                             <div class="game-title">Ruletka</div>
@@ -144,9 +140,36 @@
                                 <span class="tag tag-yellow">Losowa</span>
                                 <span class="tag tag-purple">Kasyno</span>
                             </div>
-                            <p class="game-desc">Postaw na swój ulubiony numer lub kolor i zakręć kołem fortuny. Sprawdź, czy dzisiaj sprzyja Ci szczęście!</p>
+                            <p class="game-desc">Postaw na swój ulubiony numer lub kolor i zakręć kołem fortuny.
+                                Sprawdź, czy dzisiaj sprzyja Ci szczęście!</p>
                             <div class="game-footer">
                                 <span class="game-status-coming">COMING SOON...</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Game: Catchstar -->
+                    <a href="gry/catchstar/catchstar.html" class="game-card" style="border-color: var(--neon-green);"
+                        data-title="catchstar łap gwiazdkę" data-genre="reflex,zręcznościowa">
+                        <div class="game-banner" style="background: linear-gradient(45deg, #0d2b0d 0%, #0f2e1a 100%);">
+                            <span style="font-size:4rem;">⭐</span>
+                            <div
+                                style="position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle, rgba(57,255,20,0.2) 0%, transparent 70%);">
+                            </div>
+                        </div>
+                        <div class="game-body">
+                            <div class="game-title" style="color: #e6ffe6; text-shadow: 0 0 5px rgba(57,255,20,0.3);">
+                                Łap Gwiazdkę</div>
+                            <div class="game-tags">
+                                <span class="tag"
+                                    style="background:rgba(57,255,20,0.12);border:1px solid var(--neon-green);color:var(--neon-green);">Zręcznościowa</span>
+                                <span class="tag tag-cyan">Refleks</span>
+                            </div>
+                            <p class="game-desc">Klikaj ruchome gwiazdki tak szybko jak możesz! Masz 30 sekund — pobij
+                                swój rekord i wpisz się na szczyt listy!</p>
+                            <div class="game-footer">
+                                <span class="play-action" style="color:var(--neon-green);">GRAJ TERAZ <i
+                                        class="fa-solid fa-circle-play"></i></span>
                             </div>
                         </div>
                     </a>
@@ -161,7 +184,7 @@
                         </h2>
                         <div class="leaderboard-tabs">
                             <button class="tab-btn active" data-game="saper">Saper</button>
-                            <button class="tab-btn" data-game="catchstar">Łap Gwiazdkę</button>
+                            <button class="tab-btn" data-game="catchstar">Catchstar</button>
                             <button class="tab-btn" data-game="oczko">Oczko</button>
                             <button class="tab-btn" data-game="ruletka">Ruletka</button>
                         </div>
@@ -189,11 +212,12 @@
 
         <!-- Footer -->
         <footer class="credits">
-            <p>Retro Arcade Hub &copy; 2026. Made with <span>&hearts;</span> for Studia SGGW.</p>
+            <p>Retro Arcade Hub &copy; 2026. Made with <span>&hearts;</span>.</p>
         </footer>
     </div>
 
     <!-- Załadowanie pliku konfiguracyjnego oraz głównej logiki lobby -->
     <script type="module" src="lobby.js"></script>
 </body>
+
 </html>
