@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Łap Gwiazdkę - Retro Arcade</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="catchstar.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="title-container">
+                <h1 class="retro-title">Łap Gwiazdkę</h1>
+            </div>
+            <div class="subtitle">Kliknij jak najwięcej gwiazdek w 30 sekund</div>
+        </header>
+
+        <main class="catchstar-main">
+            <section class="glass-panel catchstar-panel">
+                <div class="game-info-row">
+                    <div>
+                        <h2 class="panel-title cyan"><i class="fa-solid fa-star"></i> Zasady Gry</h2>
+                        <p>Kliknij ruchomą gwiazdkę tak szybko, jak potrafisz. Każde trafienie zwiększa wynik o 1. Rozgrywka trwa 30 sekund.</p>
+                    </div>
+                    <div class="score-panel">
+                        <div class="score-box">
+                            <span>Wynik</span>
+                            <strong id="score-val">0</strong>
+                        </div>
+                        <div class="score-box">
+                            <span>Czas</span>
+                            <strong id="timer-val">30</strong>
+                        </div>
+                        <div class="score-box">
+                            <span>Rekord</span>
+                            <strong id="best-val">0</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-arena" id="game-arena">
+                    <button id="target-star" class="target-star" aria-label="Gwiazda do kliknięcia">★</button>
+                </div>
+
+                <div class="game-action-row">
+                    <button id="start-btn" class="save-btn">Rozpocznij</button>
+                    <button onclick="window.location.href='../index.html'" class="save-btn" style="background: linear-gradient(135deg, #ff5e00 0%, #ffe600 100%);">Powrót do Lobby</button>
+                </div>
+                <p class="game-hint">Wypróbuj refleks i spróbuj pobić swój najlepszy wynik!</p>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" integrity="sha512-pnH4R2wCjFnkMwmMDOfHn4z7tOx5SyB9XJz0pZN4xpkp5shjS0Tf+2PjeYyWXoVBT31PDMkI8z2qM+RdXvO6xA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="catchstar.js"></script>
+</body>
+</html>

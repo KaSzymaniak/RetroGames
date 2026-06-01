@@ -34,6 +34,11 @@ const leaderboardMockData = {
         { name: 'RedOrBlack', avatar: '🚀', score: 500 },
         { name: 'WheelSpinner', avatar: '👾', score: 350 },
         { name: 'Rohan', avatar: '🕹️', score: 200 }
+    ],
+    catchstar: [
+        { name: 'SpeedStar', avatar: '🚀', score: 54 },
+        { name: 'NeonFingers', avatar: '👾', score: 45 },
+        { name: 'PixelRush', avatar: '🕹️', score: 39 }
     ]
 };
 
