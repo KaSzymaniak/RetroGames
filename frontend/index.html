@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Arcade Hub - Lobby</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>WIRTUALNY SALON GIER</h1>
+    
+    <div class="status-box">
+        Status serwera: <span id="server-status" style="color: yellow;">Łączenie...</span>
+    </div>
+
+    <div class="games-grid">
+        <!-- Tutaj podpinamy pierwszą grę z folderu -->
+        <a href="games/saper/saper.html" class="game-card">💣 Saper</a>
+        <a href="#" class="game-card">🃏 Oczko</a>
+        <a href="#" class="game-card">🎡 Ruletka</a>
+    </div>
+
+    <script type="module">
+        import { API_URL } from './config.js';
+
+        async function sprawdzSerwer() {
+            try {
+                const odpowiedz = await fetch(`${API_URL}/api/status`);
+                const dane = await odpowiedz.json();
+                document.getElementById('server-status').innerText = '🟢 ONLINE';
+                document.getElementById('server-status').style.color = 'lightgreen';
+            } catch (err) {
+                document.getElementById('server-status').innerText = '🔴 OFFLINE';
+                document.getElementById('server-status').style.color = 'red';
+            }
+        }
+        sprawdzSerwer();
+    </script>
+</body>
+</html>
