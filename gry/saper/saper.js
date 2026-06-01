@@ -1,5 +1,5 @@
-// Zauważ, że cofamy się o dwa foldery (../../) by pobrać config
-import { API_URL } from '../../config.js';
+// Zauważ, że cofamy się o dwa foldery (../../) i wchodzimy do frontend/ by pobrać config
+import { API_URL } from '../../frontend/config.js';
 
 const winBtn = document.getElementById('win-btn');
 const msgLabel = document.getElementById('msg');
