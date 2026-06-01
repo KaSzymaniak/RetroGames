@@ -2,20 +2,68 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Gra Saper</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gra Saper - Retro Arcade</title>
     <link rel="stylesheet" href="saper.css">
+    <!-- Dodanie ikon FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <a href="../../index.html" class="back-btn">⬅ Wróć do Lobby</a>
+    <div class="crt-overlay"></div>
     
-    <h1>💣 Saper</h1>
-    <p>Miejsce na planszę z grą...</p>
+    <div class="game-container">
+        <!-- Back Button -->
+        <a href="../../index.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i> Wróć do Lobby
+        </a>
+        
+        <!-- Game Header -->
+        <header class="game-header">
+            <h1 class="game-title">💣 Saper</h1>
+            <p class="game-subtitle">Tryb Klasyczny &bull; Wyzwanie Saperów</p>
+        </header>
 
-    <!-- Przycisk symulujący wygraną, żeby przetestować bazę -->
-    <button id="win-btn">Symuluj wygraną (Zdobądź 100 pkt)</button>
-    <p id="msg"></p>
+        <!-- Main Game Panel -->
+        <div class="glass-card">
+            
+            <!-- Player mini badge -->
+            <div class="player-badge" id="player-badge">
+                <span class="badge-avatar" id="badge-avatar">👾</span>
+                <span class="badge-name" id="badge-name">Anonim</span>
+            </div>
 
-    <!-- Uwaga: skrypt jest typu module -->
+            <!-- Game board placeholder -->
+            <div class="board-container">
+                <div class="retro-board-placeholder">
+                    <i class="fa-solid fa-burst bomb-icon"></i>
+                    <p class="placeholder-text">Miejsce na planszę z grą...</p>
+                    <p class="desc-text">Osoba od gry Saper wstawi tu właściwy kod planszy i logiki.</p>
+                </div>
+            </div>
+
+            <!-- Testing controls -->
+            <div class="controls-panel">
+                <p class="panel-desc">Użyj poniższego przycisku, aby przetestować integrację z bazą danych i zaktualizować swój wynik w lobby:</p>
+                <button id="win-btn" class="neon-btn pink-neon">
+                    <i class="fa-solid fa-trophy"></i> Symuluj wygraną (+100 pkt)
+                </button>
+                <p id="msg" class="status-msg"></p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Skrypt typu module -->
     <script type="module" src="saper.js"></script>
+    <script type="module">
+        // Wyświetlanie aktualnego profilu gracza w grze Saper
+        function odswiezProfilGracza() {
+            const nick = localStorage.getItem('arcade_nickname') || 'Anonim';
+            const avatar = localStorage.getItem('arcade_avatar') || '👾';
+            document.getElementById('badge-name').innerText = nick;
+            document.getElementById('badge-avatar').innerText = avatar;
+        }
+        odswiezProfilGracza();
+    </script>
 </body>
 </html>

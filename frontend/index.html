@@ -2,38 +2,181 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Arcade Hub - Lobby</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Arcade Club - Lobby</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Dodanie ikon FontAwesome do interfejsu -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <h1>WIRTUALNY SALON GIER</h1>
-    
-    <div class="status-box">
-        Status serwera: <span id="server-status" style="color: yellow;">Łączenie...</span>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="title-container">
+                <h1 class="retro-title">Retro Arcade</h1>
+            </div>
+            <div class="subtitle">Virtual Games Lobby</div>
+            <div class="insert-coin"><i class="fa-solid fa-gamepad"></i> INSERT COIN TO PLAY <i class="fa-solid fa-gamepad"></i></div>
+        </header>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                
+                <!-- Player Profile Panel -->
+                <div class="glass-panel" id="profile-panel">
+                    <h2 class="panel-title purple"><i class="fa-solid fa-user-astronaut"></i> Profil Gracza</h2>
+                    <div class="profile-card">
+                        <div class="avatar-selector">
+                            <span class="avatar-opt active" data-avatar="👾">👾</span>
+                            <span class="avatar-opt" data-avatar="🚀">🚀</span>
+                            <span class="avatar-opt" data-avatar="🕹️">🕹️</span>
+                            <span class="avatar-opt" data-avatar="🤖">🤖</span>
+                            <span class="avatar-opt" data-avatar="🦊">🦊</span>
+                            <span class="avatar-opt" data-avatar="🐱">🐱</span>
+                        </div>
+                        
+                        <div class="nickname-input-group">
+                            <label for="nickname">Twój Pseudonim</label>
+                            <input type="text" id="nickname" class="nickname-input" placeholder="Wpisz swój nick..." maxlength="15">
+                        </div>
+                        
+                        <button id="save-profile-btn" class="save-btn">Zapisz Profil</button>
+                    </div>
+                </div>
+
+                <!-- Server & Portal Status -->
+                <div class="glass-panel cyan-border" id="status-panel">
+                    <h2 class="panel-title cyan"><i class="fa-solid fa-server"></i> System Status</h2>
+                    <div class="status-container">
+                        <div class="status-row">
+                            <span class="status-label">Serwer:</span>
+                            <span class="status-value" id="status-server-val">
+                                <span class="pulse-dot connecting" id="status-indicator"></span>
+                                <span id="status-text">ŁĄCZENIE...</span>
+                            </span>
+                        </div>
+                        <div class="status-row">
+                            <span class="status-label">Aktywne Gry:</span>
+                            <span class="status-value text-cyan" id="status-games-count">1 / 3</span>
+                        </div>
+                        <div class="status-row">
+                            <span class="status-label">Czas Systemu:</span>
+                            <span class="status-value text-yellow" id="system-time">00:00:00</span>
+                        </div>
+                        <div class="status-row">
+                            <span class="status-label">Twoja Sesja:</span>
+                            <span class="status-value text-pink" id="session-status">Aktywna</span>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="main-content">
+                
+                <!-- Game Search Bar -->
+                <div class="search-container">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="game-search" class="search-input" placeholder="Wyszukaj grę w salonie gier...">
+                </div>
+
+                <!-- Games Grid -->
+                <div class="games-grid" id="games-container">
+                    
+                    <!-- Game: Saper -->
+                    <a href="games/saper/saper.html" class="game-card cyan-card" data-title="saper" data-genre="logic,classic">
+                        <div class="game-banner">💣</div>
+                        <div class="game-body">
+                            <div class="game-title">Saper (Minesweeper)</div>
+                            <div class="game-tags">
+                                <span class="tag tag-cyan">Logiczna</span>
+                                <span class="tag tag-purple">Klasyk</span>
+                            </div>
+                            <p class="game-desc">Rozbrajaj miny na planszy, używając dedukcji. Pamiętaj, aby nie kliknąć w bombę! Zdobądź 100 pkt za wygraną.</p>
+                            <div class="game-footer">
+                                <span class="play-action">GRAJ TERAZ <i class="fa-solid fa-circle-play"></i></span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Game: Oczko -->
+                    <a href="#" class="game-card pink-card disabled-card" data-title="oczko blackjack" data-genre="cards,classic" onclick="event.preventDefault(); alert('Gra Oczko już wkrótce w naszym salonie!');">
+                        <div class="game-banner">🃏</div>
+                        <div class="game-body">
+                            <div class="game-title">Oczko (Blackjack)</div>
+                            <div class="game-tags">
+                                <span class="tag tag-pink">Karciana</span>
+                                <span class="tag tag-purple">Klasyk</span>
+                            </div>
+                            <p class="game-desc">Zbliż się jak najbliżej 21 punktów, ale nie przekraczaj limitu. Pokonaj krupiera w tej pasjonującej grze karcianej.</p>
+                            <div class="game-footer">
+                                <span class="game-status-coming">COMING SOON...</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Game: Ruletka -->
+                    <a href="#" class="game-card yellow-card disabled-card" data-title="ruletka casino" data-genre="luck" onclick="event.preventDefault(); alert('Gra Ruletka już wkrótce w naszym salonie!');">
+                        <div class="game-banner">🎡</div>
+                        <div class="game-body">
+                            <div class="game-title">Ruletka</div>
+                            <div class="game-tags">
+                                <span class="tag tag-yellow">Losowa</span>
+                                <span class="tag tag-purple">Kasyno</span>
+                            </div>
+                            <p class="game-desc">Postaw na swój ulubiony numer lub kolor i zakręć kołem fortuny. Sprawdź, czy dzisiaj sprzyja Ci szczęście!</p>
+                            <div class="game-footer">
+                                <span class="game-status-coming">COMING SOON...</span>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+
+                <!-- Leaderboard Section -->
+                <div class="glass-panel leaderboard-panel">
+                    <div class="leaderboard-header-row">
+                        <h2 class="panel-title cyan" style="margin-bottom: 0; border: none; padding: 0;">
+                            <i class="fa-solid fa-trophy"></i> TABELA WYNIKÓW
+                        </h2>
+                        <div class="leaderboard-tabs">
+                            <button class="tab-btn active" data-game="saper">Saper</button>
+                            <button class="tab-btn" data-game="oczko">Oczko</button>
+                            <button class="tab-btn" data-game="ruletka">Ruletka</button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="retro-table">
+                            <thead>
+                                <tr>
+                                    <th class="rank-col">Rank</th>
+                                    <th>Gracz</th>
+                                    <th style="text-align: right;">Punkty</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leaderboard-body">
+                                <!-- Wypełniane dynamicznie przez JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="credits">
+            <p>Retro Arcade Hub &copy; 2026. Made with <span>&hearts;</span> for Studia SGGW.</p>
+        </footer>
     </div>
 
-    <div class="games-grid">
-        <!-- Tutaj podpinamy pierwszą grę z folderu -->
-        <a href="games/saper/saper.html" class="game-card">💣 Saper</a>
-        <a href="#" class="game-card">🃏 Oczko</a>
-        <a href="#" class="game-card">🎡 Ruletka</a>
-    </div>
-
-    <script type="module">
-        import { API_URL } from './config.js';
-
-        async function sprawdzSerwer() {
-            try {
-                const odpowiedz = await fetch(`${API_URL}/api/status`);
-                const dane = await odpowiedz.json();
-                document.getElementById('server-status').innerText = '🟢 ONLINE';
-                document.getElementById('server-status').style.color = 'lightgreen';
-            } catch (err) {
-                document.getElementById('server-status').innerText = '🔴 OFFLINE';
-                document.getElementById('server-status').style.color = 'red';
-            }
-        }
-        sprawdzSerwer();
-    </script>
+    <!-- Załadowanie pliku konfiguracyjnego oraz głównej logiki lobby -->
+    <script type="module" src="lobby.js"></script>
 </body>
 </html>

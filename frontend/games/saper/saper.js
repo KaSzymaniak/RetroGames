@@ -8,18 +8,28 @@ winBtn.addEventListener('click', async () => {
     msgLabel.innerText = "Wysyłanie wyniku do serwera...";
     winBtn.disabled = true;
 
+    const graczNick = localStorage.getItem('arcade_nickname') || 'Anonim';
+    const graczAvatar = localStorage.getItem('arcade_avatar') || '👾';
+    const punktyZdobyte = 100;
+
     try {
         const odpowiedz = await fetch(`${API_URL}/api/zapisz-wynik`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 gra: 'Saper',
-                punkty: 100,
-                gracz: 'Anonim'
+                punkty: punktyZdobyte,
+                gracz: `${graczAvatar} ${graczNick}`
             })
         });
 
         const dane = await odpowiedz.json();
+        
+        // Zapisujemy punkty lokalnie, aby lobby mogło odczytać nasz wynik
+        const aktualnyNajlepszy = localStorage.getItem('arcade_score_saper') || 0;
+        if (punktyZdobyte > parseInt(aktualnyNajlepszy, 10)) {
+            localStorage.setItem('arcade_score_saper', punktyZdobyte);
+        }
         msgLabel.innerText = "✅ " + dane.message;
         msgLabel.style.color = "lightgreen";
     } catch (err) {
