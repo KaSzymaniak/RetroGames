@@ -1,1 +1,2 @@
-https://kaszymaniak.github.io/RetroGames/frontend/
+https://kaszymaniak.github.io/RetroGames/frontend
+
