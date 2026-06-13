@@ -226,10 +226,26 @@ function odswiezZegar() {
     systemTimeVal.innerText = `${godzina}:${minuta}:${sekunda}`;
 }
 
+// 6. Dynamiczny Licznik Gier
+function aktualizujLicznikGier() {
+    const kartyGier = document.querySelectorAll('.game-card');
+    let aktywne = 0;
+    kartyGier.forEach(karta => {
+        if (!karta.classList.contains('disabled-card')) {
+            aktywne++;
+        }
+    });
+    const licznik = document.getElementById('status-games-count');
+    if (licznik) {
+        licznik.innerText = `${aktywne} / ${kartyGier.length}`;
+    }
+}
+
 // Inicjalizacja
 wczytajProfil();
 sprawdzSerwer();
 odswiezZegar();
+aktualizujLicznikGier();
 
 // Interwały
 setInterval(odswiezZegar, 1000);
