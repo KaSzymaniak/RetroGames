@@ -30,6 +30,11 @@ const leaderboardMockData = {
         { name: 'QuickFingers', avatar: '🚀', score: 21 },
         { name: 'ClickMaster', avatar: '🤖', score: 17 }
     ],
+    arkanoid: [
+        { name: 'BrickBreaker', avatar: '🛸', score: 3500 },
+        { name: 'LaserDodger', avatar: '👾', score: 2100 },
+        { name: 'NeonRider', avatar: '🚀', score: 1200 }
+    ],
     oczko: [
         { name: 'CasinoRoyale', avatar: '🐱', score: 210 },
         { name: 'BlackjackPro', avatar: '🤖', score: 180 },

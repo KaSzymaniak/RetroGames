@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arkanoid - Retro Arcade</title>
+    <meta name="description" content="Arkanoid — połączenie Arkanoida ze Space Invaders w stylu Synthwave.">
+    <link rel="stylesheet" href="arkanoid.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="game-wrapper">
+
+        <!-- Header -->
+        <header class="game-header">
+            <a href="../../frontend/index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i> Lobby
+            </a>
+            <h1 class="game-title-text">ARKANOID</h1>
+            <div class="player-badge">
+                <span class="badge-avatar" id="badge-avatar">👾</span>
+                <span class="badge-name" id="badge-name">Anonim</span>
+            </div>
+        </header>
+
+        <!-- Canvas + Overlays -->
+        <div class="canvas-container" id="canvas-container">
+            <canvas id="game-canvas" width="800" height="600"></canvas>
+            <div class="scanlines"></div>
+
+            <!-- ─── Start Screen ─── -->
+            <div class="overlay" id="start-screen">
+                <h2 class="overlay-title cyan">ARKANOID</h2>
+                <div class="overlay-divider"></div>
+                <p class="overlay-subtitle">
+                    Odbijaj piłkę paletką i zniszcz wrogą flotę klocków. Unikaj czerwonych laserów!
+                    Łap zielone kapsułki, by zdobyć ulepszenia.
+                </p>
+                <div class="controls-info">
+                    <div class="control-item">
+                        <span class="control-key">MYSZ</span>
+                        <span>Sterowanie paletką</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="control-key">3 ❤️</span>
+                        <span>Życia</span>
+                    </div>
+                </div>
+                <button class="neon-btn" id="start-btn">START GAME</button>
+            </div>
+
+            <!-- ─── Game Over Screen ─── -->
+            <div class="overlay hidden" id="gameover-screen">
+                <h2 class="overlay-title pink">GAME OVER</h2>
+                <div class="overlay-divider"></div>
+                <p class="overlay-score">WYNIK: <span id="final-score">0</span></p>
+                <p class="overlay-level">Osiągnięty poziom: <span id="final-level">1</span></p>
+                <div class="btn-group">
+                    <button class="neon-btn green" id="save-btn">
+                        <i class="fa-solid fa-floppy-disk"></i>&ensp;ZAPISZ WYNIK
+                    </button>
+                    <button class="neon-btn pink" id="restart-btn">
+                        <i class="fa-solid fa-rotate-right"></i>&ensp;JESZCZE RAZ
+                    </button>
+                    <a href="../../frontend/index.html" class="neon-btn lobby">
+                        <i class="fa-solid fa-house"></i>&ensp;LOBBY
+                    </a>
+                </div>
+                <p class="save-msg" id="save-msg"></p>
+            </div>
+        </div>
+
+        <!-- Sub-info -->
+        <div class="sub-info">
+            <span class="info-text">RETRO ARCADE &copy; 2026</span>
+            <span class="info-text">ARKANOID × SPACE INVADERS</span>
+        </div>
+
+    </div>
+
+    <script type="module" src="arkanoid.js"></script>
+</body>
+
+</html>
