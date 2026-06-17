@@ -1,11 +1,20 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+
+// Serwowanie statycznych plików frontendu i gier
+app.use(express.static(path.join(__dirname, '..')));
+
+// Przekierowanie z / na /frontend/
+app.get('/', (req, res) => {
+    res.redirect('/frontend/');
+});
 
 // 1. Endpoint statusu
 app.get('/api/status', (req, res) => {

@@ -35,6 +35,12 @@ const leaderboardMockData = {
         { name: 'LaserDodger', avatar: '👾', score: 2100 },
         { name: 'NeonRider', avatar: '🚀', score: 1200 }
     ],
+    warcaby: [
+        { name: 'CheckersKing', avatar: '♟️', score: 340 },
+        { name: 'StrategMaster', avatar: '🤖', score: 220 },
+        { name: 'RetroChecker', avatar: '🕹️', score: 175 },
+        { name: 'NeonDraughts', avatar: '🚀', score: 110 }
+    ],
     oczko: [
         { name: 'CasinoRoyale', avatar: '🐱', score: 210 },
         { name: 'BlackjackPro', avatar: '🤖', score: 180 },

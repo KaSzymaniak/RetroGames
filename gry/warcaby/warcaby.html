@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warcaby - Retro Arcade</title>
+    <link rel="stylesheet" href="warcaby.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="game-wrapper">
+
+        <!-- Header -->
+        <div class="game-header">
+            <a href="../../frontend/index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i> Lobby
+            </a>
+            <h1 class="game-title-text">WARCABY</h1>
+            <div class="player-badge">
+                <span class="badge-avatar" id="badge-avatar">👾</span>
+                <span class="badge-name" id="badge-name">Anonim</span>
+            </div>
+        </div>
+
+        <!-- Main play area: board + info panel -->
+        <div class="play-area">
+
+            <!-- Board -->
+            <div class="board-wrapper">
+                <div class="board-labels-top">
+                    <span>a</span><span>b</span><span>c</span><span>d</span>
+                    <span>e</span><span>f</span><span>g</span><span>h</span>
+                </div>
+                <div class="board-side">
+                    <div class="board-labels-side">
+                        <span>8</span><span>7</span><span>6</span><span>5</span>
+                        <span>4</span><span>3</span><span>2</span><span>1</span>
+                    </div>
+                    <div id="board" class="checker-board"></div>
+                </div>
+            </div>
+
+            <!-- Info Panel -->
+            <div class="info-panel">
+
+                <div class="turn-display" id="turn-display">
+                    <div class="turn-label">TURA</div>
+                    <div class="turn-piece-row">
+                        <div class="turn-piece-icon player-turn-icon" id="turn-icon"></div>
+                        <div class="turn-text" id="turn-text">Twój ruch</div>
+                    </div>
+                </div>
+
+                <div class="panel-divider"></div>
+
+                <div class="score-section">
+                    <div class="stat-label"><i class="fa-solid fa-star"></i> WYNIK</div>
+                    <div class="score-value" id="score-value">0</div>
+                    <div class="score-unit">punktów</div>
+                </div>
+
+                <div class="panel-divider"></div>
+
+                <div class="pieces-section">
+                    <div class="pieces-row">
+                        <div class="mini-piece player-mini"></div>
+                        <span class="piece-label">Ty:</span>
+                        <span class="piece-count" id="player-count">12</span>
+                    </div>
+                    <div class="pieces-row">
+                        <div class="mini-piece ai-mini"></div>
+                        <span class="piece-label">AI:</span>
+                        <span class="piece-count" id="ai-count">12</span>
+                    </div>
+                </div>
+
+                <div class="panel-divider"></div>
+
+                <div class="status-section">
+                    <p class="status-msg" id="status-msg">Wybierz pionek i wykonaj ruch.</p>
+                </div>
+
+                <div class="btn-group">
+                    <button class="neon-btn" id="new-game-btn">
+                        <i class="fa-solid fa-rotate-right"></i> Nowa Gra
+                    </button>
+                    <button class="neon-btn amber-btn" id="save-btn" disabled>
+                        <i class="fa-solid fa-floppy-disk"></i> Zapisz Wynik
+                    </button>
+                </div>
+
+                <div class="save-msg-area">
+                    <span id="save-msg"></span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer info -->
+        <div class="sub-info">
+            <span class="info-text">RETRO ARCADE — WARCABY v1.0</span>
+            <span class="info-text">Bicie jest obowiązkowe &bull; Damka porusza się dowolnie</span>
+        </div>
+
+    </div>
+
+    <script type="module" src="warcaby.js"></script>
+</body>
+
+</html>
