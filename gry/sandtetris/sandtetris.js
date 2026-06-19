@@ -228,11 +228,17 @@ function clearSpans() {
             const cy = (ci - cx) / COLS;
             if (cx === COLS - 1) touchesRight = true;
 
-            // 4-neighbours of same colour, not yet visited
-            if (cx > 0)        { const n = ci - 1;    if (!visited[n] && grid[n] === c) { visited[n] = 1; stack[sp++] = n; } }
-            if (cx < COLS - 1) { const n = ci + 1;    if (!visited[n] && grid[n] === c) { visited[n] = 1; stack[sp++] = n; } }
-            if (cy > 0)        { const n = ci - COLS; if (!visited[n] && grid[n] === c) { visited[n] = 1; stack[sp++] = n; } }
-            if (cy < ROWS - 1) { const n = ci + COLS; if (!visited[n] && grid[n] === c) { visited[n] = 1; stack[sp++] = n; } }
+            // 8-neighbours of same colour, not yet visited
+            // (diagonals included so grains that only touch at a corner still link up)
+            const hasL = cx > 0, hasR = cx < COLS - 1, hasU = cy > 0, hasD = cy < ROWS - 1;
+            if (hasL)         { const n = ci - 1;        if (!visited[n] && grid[n] === c) { visited[n] = 1; stack[sp++] = n; } }
+            if (hasR)         { const n = ci + 1;        if (!visited[n] && grid[n] === c) { visited[n] = 1; stack[sp++] = n; } }
+            if (hasU)         { const n = ci - COLS;     if (!visited[n] && grid[n] === c) { visited[n] = 1; stack[sp++] = n; } }
+            if (hasD)         { const n = ci + COLS;     if (!visited[n] && grid[n] === c) { visited[n] = 1; stack[sp++] = n; } }
+            if (hasL && hasU) { const n = ci - COLS - 1; if (!visited[n] && grid[n] === c) { visited[n] = 1; stack[sp++] = n; } }
+            if (hasR && hasU) { const n = ci - COLS + 1; if (!visited[n] && grid[n] === c) { visited[n] = 1; stack[sp++] = n; } }
+            if (hasL && hasD) { const n = ci + COLS - 1; if (!visited[n] && grid[n] === c) { visited[n] = 1; stack[sp++] = n; } }
+            if (hasR && hasD) { const n = ci + COLS + 1; if (!visited[n] && grid[n] === c) { visited[n] = 1; stack[sp++] = n; } }
         }
 
         if (touchesRight) {

@@ -56,16 +56,15 @@ body {
 .game-header {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 20px;
+    justify-content: space-between;
+    gap: 12px;
     width: 100%;
     max-width: 460px;
     position: relative;
 }
 
 .back-link {
-    position: absolute;
-    left: 0;
+    flex-shrink: 0;
     color: var(--neon-cyan);
     text-decoration: none;
     font-size: 14px;
@@ -83,10 +82,12 @@ body {
 }
 
 .game-title-text {
+    flex: 1;
+    min-width: 0;
     font-family: 'Orbitron', sans-serif;
     font-weight: 900;
-    font-size: 22px;
-    letter-spacing: 3px;
+    font-size: 18px;
+    letter-spacing: 2px;
     background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
