@@ -6,5 +6,6 @@ Projekt `RetroGames` to prosta kolekcja gier retro dostępna w przeglądarce. W 
 
 - `Saper` – popularna gra logiczna, w której odkrywasz pola i oznaczasz miny.
 - `Warcaby` - legendarna gra planszowa, 
+- `Tetris z Piasku` - wariant Tetrisa z fizyką sypiącego się piasku; czyść planszę, łącząc jeden kolor od lewej do prawej krawędzi.
 
 W przyszłości można tu dodać kolejne gry, aby rozszerzyć bibliotekę retro tytułów.

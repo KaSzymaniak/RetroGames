@@ -1,0 +1,364 @@
+/* ═══════════════════════════════════════════════════
+   TETRIS Z PIASKU — Synthwave / Cyberpunk Stylesheet
+   ═══════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+    --bg-dark: #0a0a1a;
+    --bg-panel: #1a1a2e;
+    --neon-cyan: #00d4ff;
+    --neon-pink: #ff006e;
+    --neon-green: #00ff88;
+    --neon-red: #ff0040;
+    --neon-yellow: #ffd700;
+    --neon-purple: #b84dff;
+    --glass-bg: rgba(20, 20, 50, 0.85);
+    --glass-border: rgba(0, 212, 255, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: var(--bg-dark);
+    background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(0, 212, 255, 0.04) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(255, 0, 110, 0.04) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 100%, rgba(184, 77, 255, 0.03) 0%, transparent 50%);
+    font-family: 'Share Tech Mono', 'Courier New', monospace;
+    color: #e0e0ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Game Wrapper ── */
+.game-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+}
+
+/* ── Header ── */
+.game-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 460px;
+    position: relative;
+}
+
+.back-link {
+    position: absolute;
+    left: 0;
+    color: var(--neon-cyan);
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'Share Tech Mono', monospace;
+    opacity: 0.7;
+    transition: opacity 0.3s, text-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.back-link:hover {
+    opacity: 1;
+    text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.game-title-text {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.4));
+    text-align: center;
+}
+
+/* ── Player Badge ── */
+.player-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 4px 14px 4px 8px;
+    font-size: 13px;
+    backdrop-filter: blur(6px);
+}
+
+.badge-avatar { font-size: 18px; }
+
+.badge-name {
+    color: var(--neon-cyan);
+    font-family: 'Share Tech Mono', monospace;
+}
+
+/* ── Canvas Container ── */
+.canvas-container {
+    position: relative;
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    border-radius: 8px;
+    box-shadow:
+        0 0 20px rgba(0, 212, 255, 0.15),
+        0 0 60px rgba(0, 212, 255, 0.05),
+        inset 0 0 30px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    background: var(--bg-panel);
+}
+
+#game-canvas {
+    display: block;
+    image-rendering: pixelated;
+}
+
+/* ── Screen Shake ── */
+@keyframes shake {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    20% { transform: translate(4px, 3px) rotate(0.4deg); }
+    40% { transform: translate(-4px, 2px) rotate(-0.3deg); }
+    60% { transform: translate(3px, -3px) rotate(0.3deg); }
+    80% { transform: translate(-3px, -2px) rotate(-0.2deg); }
+}
+
+.shake {
+    animation: shake 0.35s ease-in-out;
+}
+
+/* ── Overlays ── */
+.overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5, 5, 20, 0.92);
+    backdrop-filter: blur(8px);
+    z-index: 10;
+    gap: 14px;
+    padding: 26px;
+    transition: opacity 0.4s ease;
+}
+
+.overlay.hidden {
+    display: none;
+}
+
+.overlay-title {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 38px;
+    letter-spacing: 5px;
+    text-align: center;
+    line-height: 1.1;
+}
+
+.overlay-title.cyan {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 30px rgba(0, 212, 255, 0.6), 0 0 60px rgba(0, 212, 255, 0.3);
+}
+
+.overlay-title.pink {
+    color: var(--neon-pink);
+    text-shadow: 0 0 30px rgba(255, 0, 110, 0.6), 0 0 60px rgba(255, 0, 110, 0.3);
+}
+
+.overlay-subtitle {
+    font-size: 14px;
+    color: rgba(220, 220, 255, 0.7);
+    max-width: 320px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.overlay-score {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 22px;
+    color: var(--neon-yellow);
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    margin: 4px 0;
+}
+
+.overlay-level {
+    font-size: 14px;
+    color: var(--neon-purple);
+    text-shadow: 0 0 10px rgba(184, 77, 255, 0.4);
+}
+
+.overlay-divider {
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+    margin: 4px 0;
+}
+
+/* ── Controls Info ── */
+.controls-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin: 8px 0;
+}
+
+.control-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: rgba(220, 220, 255, 0.5);
+}
+
+.control-key {
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--neon-cyan);
+}
+
+/* ── Neon Buttons ── */
+.neon-btn {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 2px;
+    padding: 12px 32px;
+    border: 2px solid var(--neon-cyan);
+    border-radius: 6px;
+    background: rgba(0, 212, 255, 0.08);
+    color: var(--neon-cyan);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    min-width: 200px;
+    display: inline-block;
+}
+
+.neon-btn:hover {
+    background: rgba(0, 212, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.05);
+    transform: translateY(-2px);
+}
+
+.neon-btn:active { transform: translateY(0); }
+
+.neon-btn.pink {
+    border-color: var(--neon-pink);
+    color: var(--neon-pink);
+    background: rgba(255, 0, 110, 0.08);
+}
+
+.neon-btn.pink:hover {
+    background: rgba(255, 0, 110, 0.2);
+    box-shadow: 0 0 20px rgba(255, 0, 110, 0.3), inset 0 0 20px rgba(255, 0, 110, 0.05);
+}
+
+.neon-btn.green {
+    border-color: var(--neon-green);
+    color: var(--neon-green);
+    background: rgba(0, 255, 136, 0.08);
+}
+
+.neon-btn.green:hover {
+    background: rgba(0, 255, 136, 0.2);
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3), inset 0 0 20px rgba(0, 255, 136, 0.05);
+}
+
+.neon-btn.lobby {
+    border-color: var(--neon-yellow);
+    color: var(--neon-yellow);
+    background: rgba(255, 215, 0, 0.06);
+    font-size: 12px;
+    padding: 8px 24px;
+    min-width: 160px;
+}
+
+.neon-btn.lobby:hover {
+    background: rgba(255, 215, 0, 0.15);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.25);
+}
+
+.neon-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* ── Save Message ── */
+.save-msg {
+    font-size: 13px;
+    min-height: 18px;
+    transition: color 0.3s;
+}
+
+/* ── Scanline Overlay ── */
+.scanlines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px
+    );
+}
+
+/* ── Sub-info Row ── */
+.sub-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 460px;
+}
+
+.info-text {
+    font-size: 11px;
+    color: rgba(220, 220, 255, 0.3);
+    letter-spacing: 1px;
+}
+
+/* ── Button Group ── */
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+    .game-title-text { font-size: 16px; letter-spacing: 1px; }
+    .overlay-title { font-size: 30px; }
+}

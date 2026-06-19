@@ -41,6 +41,11 @@ const leaderboardMockData = {
         { name: 'RetroChecker', avatar: '🕹️', score: 175 },
         { name: 'NeonDraughts', avatar: '🚀', score: 110 }
     ],
+    sandtetris: [
+        { name: 'SandStorm', avatar: '🤖', score: 4200 },
+        { name: 'DuneRunner', avatar: '🦊', score: 2800 },
+        { name: 'PixelGrain', avatar: '🚀', score: 1500 }
+    ],
     oczko: [
         { name: 'CasinoRoyale', avatar: '🐱', score: 210 },
         { name: 'BlackjackPro', avatar: '🤖', score: 180 },
