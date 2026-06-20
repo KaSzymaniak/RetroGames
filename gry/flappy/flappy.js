@@ -16,15 +16,42 @@ const saveBtn = document.getElementById('save-btn');
 const saveMsg = document.getElementById('save-msg');
 const badgeNameEl = document.getElementById('badge-name');
 const badgeAvatarEl = document.getElementById('badge-avatar');
+const difficultyHint = document.getElementById('difficulty-hint');
+const diffButtons = document.querySelectorAll('.diff-btn');
 
-const GRAVITY = 0.45;
-const FLAP = -7.5;
-const PIPE_GAP = 140;
 const PIPE_WIDTH = 56;
-const PIPE_SPEED = 2.8;
 const PIPE_SPAWN = 90;
 
+const DIFFICULTY = {
+    hard: {
+        gravity: 0.45,
+        flap: -7.5,
+        pipeGap: 140,
+        pipeSpeed: 2.8,
+        hint: 'Trudny: standardowa prędkość i wąskie rurki.'
+    },
+    easy: {
+        gravity: 0.32,
+        flap: -6.0,
+        pipeGap: Math.round(140 * 1.07),
+        pipeSpeed: 2.2,
+        hint: 'Łatwy: wolniejszy lot ptaka i szersze otwory (+7%).'
+    }
+};
+
 let bird, pipes, score, bestScore, frameCount, gameState, animId;
+let difficulty = localStorage.getItem('flappy_difficulty') || 'hard';
+let cfg = DIFFICULTY[difficulty];
+
+function applyDifficulty(mode) {
+    difficulty = mode;
+    cfg = DIFFICULTY[mode];
+    localStorage.setItem('flappy_difficulty', mode);
+    diffButtons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.difficulty === mode);
+    });
+    difficultyHint.textContent = cfg.hint;
+}
 
 function initBird() {
     bird = {
@@ -52,7 +79,7 @@ function resetGame() {
 
 function spawnPipe() {
     const minTop = 60;
-    const maxTop = H - PIPE_GAP - 80;
+    const maxTop = H - cfg.pipeGap - 80;
     const topHeight = minTop + Math.random() * (maxTop - minTop);
     pipes.push({
         x: W + PIPE_WIDTH,
@@ -67,14 +94,14 @@ function flap() {
         startScreen.classList.add('hidden');
     }
     if (gameState === 'playing') {
-        bird.vy = FLAP;
+        bird.vy = cfg.flap;
     }
 }
 
 function update() {
     if (gameState !== 'playing') return;
 
-    bird.vy += GRAVITY;
+    bird.vy += cfg.gravity;
     bird.y += bird.vy;
     bird.rotation = Math.min(Math.max(bird.vy * 3, -25), 70);
 
@@ -85,7 +112,7 @@ function update() {
 
     for (let i = pipes.length - 1; i >= 0; i--) {
         const p = pipes[i];
-        p.x -= PIPE_SPEED;
+        p.x -= cfg.pipeSpeed;
 
         if (!p.passed && p.x + PIPE_WIDTH < bird.x) {
             p.passed = true;
@@ -106,7 +133,7 @@ function update() {
     for (const p of pipes) {
         const inX = bird.x + bird.radius > p.x && bird.x - bird.radius < p.x + PIPE_WIDTH;
         const hitTop = bird.y - bird.radius < p.top;
-        const hitBottom = bird.y + bird.radius > p.top + PIPE_GAP;
+        const hitBottom = bird.y + bird.radius > p.top + cfg.pipeGap;
         if (inX && (hitTop || hitBottom)) {
             endGame();
             return;
@@ -140,7 +167,7 @@ function drawBackground() {
 }
 
 function drawPipe(p) {
-    const bottomY = p.top + PIPE_GAP;
+    const bottomY = p.top + cfg.pipeGap;
 
     ctx.fillStyle = '#00ff88';
     ctx.shadowColor = '#00ff88';
@@ -238,6 +265,13 @@ function loadProfile() {
     bestValEl.textContent = bestScore;
 }
 
+diffButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (gameState === 'playing') return;
+        applyDifficulty(btn.dataset.difficulty);
+    });
+});
+
 startBtn.addEventListener('click', () => {
     resetGame();
     beginPlaying();
@@ -292,6 +326,7 @@ canvas.addEventListener('touchstart', (e) => {
     flap();
 }, { passive: false });
 
+applyDifficulty(difficulty);
 loadProfile();
 resetGame();
 gameState = 'ready';
