@@ -97,7 +97,7 @@
                         data-genre="logic,classic">
                         <div class="game-banner">💣</div>
                         <div class="game-body">
-                            <div class="game-title">Saper (Minesweeper)</div>
+                            <div class="game-title">Saper</div>
                             <div class="game-tags">
                                 <span class="tag tag-cyan">Logiczna</span>
                                 <span class="tag tag-purple">Klasyk</span>
@@ -205,40 +205,27 @@
                         </div>
                     </a>
 
-                    <!-- Game: Oczko -->
-                    <a href="#" class="game-card pink-card disabled-card" data-title="oczko blackjack"
-                        data-genre="cards,classic"
-                        onclick="event.preventDefault(); alert('Gra Oczko już wkrótce w naszym salonie!');">
-                        <div class="game-banner">🃏</div>
-                        <div class="game-body">
-                            <div class="game-title">Oczko (Blackjack)</div>
-                            <div class="game-tags">
-                                <span class="tag tag-pink">Karciana</span>
-                                <span class="tag tag-purple">Klasyk</span>
-                            </div>
-                            <p class="game-desc">Zbliż się jak najbliżej 21 punktów, ale nie przekraczaj limitu. Pokonaj
-                                krupiera w tej pasjonującej grze karcianej.</p>
-                            <div class="game-footer">
-                                <span class="game-status-coming">COMING SOON...</span>
-                            </div>
+                    <!-- Game: Flappy Bird -->
+                    <a href="../gry/flappy/flappy.html" class="game-card"
+                        style="border-color: #00ff88;"
+                        data-title="flappy bird ptak" data-genre="arcade,reflex">
+                        <div class="game-banner"
+                            style="background: linear-gradient(45deg, #0a1a0a 0%, #0d2b1a 100%);">
+                            <span style="font-size:4rem; filter: drop-shadow(0 0 10px #ffd700);">🐦</span>
                         </div>
-                    </a>
-
-                    <!-- Game: Ruletka -->
-                    <a href="#" class="game-card yellow-card disabled-card" data-title="ruletka casino"
-                        data-genre="luck"
-                        onclick="event.preventDefault(); alert('Gra Ruletka już wkrótce w naszym salonie!');">
-                        <div class="game-banner">🎡</div>
                         <div class="game-body">
-                            <div class="game-title">Ruletka</div>
+                            <div class="game-title" style="color: #e6ffe6; text-shadow: 0 0 5px rgba(0,255,136,0.4);">
+                                Flappy Bird</div>
                             <div class="game-tags">
-                                <span class="tag tag-yellow">Losowa</span>
-                                <span class="tag tag-purple">Kasyno</span>
+                                <span class="tag tag-cyan">Arcade</span>
+                                <span class="tag"
+                                    style="background:rgba(255,215,0,0.12);border:1px solid #ffd700;color:#ffd700;">Refleks</span>
                             </div>
-                            <p class="game-desc">Postaw na swój ulubiony numer lub kolor i zakręć kołem fortuny.
-                                Sprawdź, czy dzisiaj sprzyja Ci szczęście!</p>
+                            <p class="game-desc">Steruj ptaszkiem i leć przez rurki! Każda minięta para to punkt.
+                                Kliknij lub naciśnij spację, by skoczyć.</p>
                             <div class="game-footer">
-                                <span class="game-status-coming">COMING SOON...</span>
+                                <span class="play-action" style="color:#00ff88;">GRAJ TERAZ <i
+                                        class="fa-solid fa-circle-play"></i></span>
                             </div>
                         </div>
                     </a>
@@ -257,8 +244,7 @@
                             <button class="tab-btn" data-game="arkanoid">Arkanoid</button>
                             <button class="tab-btn" data-game="warcaby">Warcaby</button>
                             <button class="tab-btn" data-game="sandtetris">Tetris z Piasku</button>
-                            <button class="tab-btn" data-game="oczko">Oczko</button>
-                            <button class="tab-btn" data-game="ruletka">Ruletka</button>
+                            <button class="tab-btn" data-game="flappy">Flappy Bird</button>
                         </div>
                     </div>
 

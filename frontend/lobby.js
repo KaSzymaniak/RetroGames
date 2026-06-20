@@ -46,15 +46,10 @@ const leaderboardMockData = {
         { name: 'DuneRunner', avatar: '🦊', score: 2800 },
         { name: 'PixelGrain', avatar: '🚀', score: 1500 }
     ],
-    oczko: [
-        { name: 'CasinoRoyale', avatar: '🐱', score: 210 },
-        { name: 'BlackjackPro', avatar: '🤖', score: 180 },
-        { name: 'LuckyLady', avatar: '🦊', score: 150 }
-    ],
-    ruletka: [
-        { name: 'RedOrBlack', avatar: '🚀', score: 500 },
-        { name: 'WheelSpinner', avatar: '👾', score: 350 },
-        { name: 'Rohan', avatar: '🕹️', score: 200 }
+    flappy: [
+        { name: 'SkyPilot', avatar: '🐦', score: 42 },
+        { name: 'NeonWing', avatar: '🚀', score: 28 },
+        { name: 'PipeDodger', avatar: '👾', score: 15 }
     ]
 };
 
@@ -176,7 +171,7 @@ function wczytajLeaderboard() {
     // Sprawdzenie lokalnych punktów użytkownika, jeśli grał
     const lokalnePunkty = localStorage.getItem(`arcade_score_${selectedGameTab}`);
     
-    let scoresList = [...leaderboardMockData[selectedGameTab]];
+    let scoresList = [...(leaderboardMockData[selectedGameTab] || [])];
 
     // Jeśli gracz ma zapisany wynik, wstrzyknij go na odpowiednie miejsce w tabeli
     if (lokalnePunkty) {

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird - Retro Arcade</title>
+    <meta name="description" content="Flappy Bird — leć przez rurki w stylu retro synthwave.">
+    <link rel="stylesheet" href="flappy.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="game-wrapper">
+
+        <header class="game-header">
+            <a href="../../frontend/index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i> Lobby
+            </a>
+            <h1 class="game-title-text">FLAPPY BIRD</h1>
+            <div class="player-badge">
+                <span class="badge-avatar" id="badge-avatar">👾</span>
+                <span class="badge-name" id="badge-name">Anonim</span>
+            </div>
+        </header>
+
+        <div class="hud-row">
+            <div class="hud-item">Wynik: <span id="score-val">0</span></div>
+            <div class="hud-item">Rekord: <span id="best-val">0</span></div>
+        </div>
+
+        <div class="canvas-container" id="canvas-container">
+            <canvas id="game-canvas" width="400" height="600"></canvas>
+            <div class="scanlines"></div>
+
+            <div class="overlay" id="start-screen">
+                <h2 class="overlay-title cyan">FLAPPY BIRD</h2>
+                <div class="overlay-divider"></div>
+                <p class="overlay-subtitle">
+                    Steruj ptaszkiem i leć przez rurki. Każda minięta para to punkt!
+                    Nie dotykaj ziemi ani rur.
+                </p>
+                <div class="controls-info">
+                    <div class="control-item">
+                        <span class="control-key">SPACJA</span>
+                        <span>Skok / start</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="control-key">KLIK</span>
+                        <span>Skok (mysz / dotyk)</span>
+                    </div>
+                </div>
+                <button class="neon-btn" id="start-btn">START GAME</button>
+            </div>
+
+            <div class="overlay hidden" id="gameover-screen">
+                <h2 class="overlay-title pink">GAME OVER</h2>
+                <div class="overlay-divider"></div>
+                <p class="overlay-score">WYNIK: <span id="final-score">0</span></p>
+                <div class="btn-group">
+                    <button class="neon-btn green" id="save-btn">
+                        <i class="fa-solid fa-floppy-disk"></i>&ensp;ZAPISZ WYNIK
+                    </button>
+                    <button class="neon-btn pink" id="restart-btn">
+                        <i class="fa-solid fa-rotate-right"></i>&ensp;JESZCZE RAZ
+                    </button>
+                    <a href="../../frontend/index.html" class="neon-btn lobby">
+                        <i class="fa-solid fa-house"></i>&ensp;LOBBY
+                    </a>
+                </div>
+                <p class="save-msg" id="save-msg"></p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="flappy.js"></script>
+</body>
+
+</html>
