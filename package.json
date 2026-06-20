@@ -1,0 +1,10 @@
+{
+  "name": "retrogames",
+  "private": true,
+  "description": "Skrypty pomocnicze do lokalnego uruchamiania RetroGames",
+  "scripts": {
+    "serve": "npx --yes serve . -l 3000",
+    "start:frontend": "npx --yes serve . -l 3000",
+    "open:lobby": "start http://localhost:3000/frontend/"
+  }
+}
