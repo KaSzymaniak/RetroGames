@@ -4,6 +4,7 @@
 // ═══════════════════════════════════════════════════════════
 
 import { API_URL } from '../../frontend/config.js';
+import { wyslijWynikNaSerwer } from '../../frontend/scores-api.js';
 
 // ─────────────────────────────────────────────
 //  Canvas & DOM References
@@ -394,7 +395,10 @@ function gameOver() {
 
     // persist best score locally
     const best = parseInt(localStorage.getItem('arcade_score_arkanoid') || '0', 10);
-    if (score > best) localStorage.setItem('arcade_score_arkanoid', score);
+    if (score > best) {
+        localStorage.setItem('arcade_score_arkanoid', score);
+        wyslijWynikNaSerwer('Arkanoid', score).catch(() => {});
+    }
 }
 
 function screenShake() {

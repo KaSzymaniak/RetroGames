@@ -4,6 +4,7 @@
 // ═══════════════════════════════════════════════════════════
 
 import { API_URL } from '../../frontend/config.js';
+import { wyslijWynikNaSerwer } from '../../frontend/scores-api.js';
 
 // ─────────────────────────────────────────────
 //  Canvas & DOM References
@@ -494,7 +495,10 @@ function gameOver() {
     saveBtn.disabled = false;
 
     const best = parseInt(localStorage.getItem('arcade_score_sandtetris') || '0', 10);
-    if (score > best) localStorage.setItem('arcade_score_sandtetris', score);
+    if (score > best) {
+        localStorage.setItem('arcade_score_sandtetris', score);
+        wyslijWynikNaSerwer('Tetris z Piasku', score).catch(() => {});
+    }
 }
 
 function startGame() {

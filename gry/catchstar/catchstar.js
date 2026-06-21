@@ -1,3 +1,5 @@
+import { wyslijWynikNaSerwer } from '../../frontend/scores-api.js';
+
 const scoreVal = document.getElementById('score-val');
 const timerVal = document.getElementById('timer-val');
 const bestVal = document.getElementById('best-val');
@@ -43,6 +45,7 @@ function zakonczGre() {
     if (score > poprzedniRekord) {
         localStorage.setItem('arcade_score_catchstar', score);
         bestVal.innerText = score;
+        wyslijWynikNaSerwer('Catchstar', score).catch(() => {});
         alert(`Brawo! Nowy rekord: ${score} pkt`);
     } else {
         alert(`Koniec gry! Twój wynik: ${score} pkt`);

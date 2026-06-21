@@ -9,4 +9,4 @@ Thumbs.db
 *.log
 *.tmp
 *.temp
-~$*
+backend/scores.json

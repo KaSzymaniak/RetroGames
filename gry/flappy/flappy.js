@@ -1,4 +1,4 @@
-import { API_URL } from '../../frontend/config.js';
+import { wyslijWynikNaSerwer } from '../../frontend/scores-api.js';
 
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
@@ -234,10 +234,12 @@ function endGame() {
     gameState = 'over';
     cancelAnimationFrame(animId);
 
-    if (score > bestScore) {
+    const nowyRekord = score > bestScore;
+    if (nowyRekord) {
         bestScore = score;
         localStorage.setItem('arcade_score_flappy', bestScore);
         bestValEl.textContent = bestScore;
+        wyslijWynikNaSerwer('Flappy Bird', score).catch(() => {});
     }
 
     finalScoreEl.textContent = score;
@@ -280,30 +282,17 @@ startBtn.addEventListener('click', () => {
 restartBtn.addEventListener('click', startGame);
 
 saveBtn.addEventListener('click', async () => {
-    const nick = localStorage.getItem('arcade_nickname') || 'Anonim';
-    const avatar = localStorage.getItem('arcade_avatar') || '👾';
-
     saveBtn.disabled = true;
     saveMsg.textContent = 'Wysyłanie...';
     saveMsg.style.color = '#ffd700';
 
     try {
-        const resp = await fetch(`${API_URL}/api/zapisz-wynik`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                nick,
-                avatar,
-                gra: 'Flappy Bird',
-                punkty: score
-            })
-        });
-        const data = await resp.json();
+        const data = await wyslijWynikNaSerwer('Flappy Bird', score);
         saveMsg.textContent = '✅ ' + data.message;
         saveMsg.style.color = '#00ff88';
     } catch {
-        saveMsg.textContent = 'ℹ️ Wynik zapisany lokalnie (serwer offline).';
-        saveMsg.style.color = '#00ff88';
+        saveMsg.textContent = 'ℹ️ Nie udało się wysłać wyniku (serwer offline).';
+        saveMsg.style.color = '#ffd700';
     }
 });
 

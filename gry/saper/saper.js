@@ -1,5 +1,6 @@
 // Zauważ, że cofamy się o dwa foldery (../../) i wchodzimy do frontend/ by pobrać config
 import { API_URL } from '../../frontend/config.js';
+import { wyslijWynikNaSerwer } from '../../frontend/scores-api.js';
 
 const winBtn = document.getElementById('win-btn');
 const msgLabel = document.getElementById('msg');
@@ -13,17 +14,7 @@ winBtn.addEventListener('click', async () => {
     const punktyZdobyte = 100;
 
     try {
-        const odpowiedz = await fetch(`${API_URL}/api/zapisz-wynik`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                gra: 'Saper',
-                punkty: punktyZdobyte,
-                gracz: `${graczAvatar} ${graczNick}`
-            })
-        });
-
-        const dane = await odpowiedz.json();
+        const dane = await wyslijWynikNaSerwer('Saper', punktyZdobyte);
         
         // Zapisujemy punkty lokalnie, aby lobby mogło odczytać nasz wynik
         const aktualnyNajlepszy = localStorage.getItem('arcade_score_saper') || 0;

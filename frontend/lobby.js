@@ -17,42 +17,6 @@ let currentAvatar = '👾';
 let currentNickname = 'Anonim';
 let selectedGameTab = 'saper';
 
-// Tabela wyników (Makieta dynamiczna połączona z zapisem)
-const leaderboardMockData = {
-    saper: [
-        { name: 'Slayer99', avatar: '🤖', score: 100 },
-        { name: 'NeoArcade', avatar: '🚀', score: 100 },
-        { name: 'PixelKing', avatar: '🕹️', score: 100 },
-        { name: 'MinesWrecker', avatar: '🦊', score: 100 }
-    ],
-    catchstar: [
-        { name: 'StarHunter', avatar: '⭐', score: 28 },
-        { name: 'QuickFingers', avatar: '🚀', score: 21 },
-        { name: 'ClickMaster', avatar: '🤖', score: 17 }
-    ],
-    arkanoid: [
-        { name: 'BrickBreaker', avatar: '🛸', score: 3500 },
-        { name: 'LaserDodger', avatar: '👾', score: 2100 },
-        { name: 'NeonRider', avatar: '🚀', score: 1200 }
-    ],
-    warcaby: [
-        { name: 'CheckersKing', avatar: '♟️', score: 340 },
-        { name: 'StrategMaster', avatar: '🤖', score: 220 },
-        { name: 'RetroChecker', avatar: '🕹️', score: 175 },
-        { name: 'NeonDraughts', avatar: '🚀', score: 110 }
-    ],
-    sandtetris: [
-        { name: 'SandStorm', avatar: '🤖', score: 4200 },
-        { name: 'DuneRunner', avatar: '🦊', score: 2800 },
-        { name: 'PixelGrain', avatar: '🚀', score: 1500 }
-    ],
-    flappy: [
-        { name: 'SkyPilot', avatar: '🐦', score: 42 },
-        { name: 'NeonWing', avatar: '🚀', score: 28 },
-        { name: 'PipeDodger', avatar: '👾', score: 15 }
-    ]
-};
-
 // 1. Sprawdzanie Statusu Serwera
 async function sprawdzSerwer() {
     try {
@@ -100,7 +64,6 @@ function wczytajProfil() {
         localStorage.setItem('arcade_avatar', '👾');
     }
 
-    // Aktualizacja aktywności avatara w UI
     avatarOpts.forEach(opt => {
         if (opt.dataset.avatar === currentAvatar) {
             opt.classList.add('active');
@@ -123,7 +86,6 @@ function zapiszProfil() {
     localStorage.setItem('arcade_nickname', wpisanyNick);
     localStorage.setItem('arcade_avatar', currentAvatar);
 
-    // Animacja przycisku zapisu
     saveProfileBtn.innerText = 'ZAPISANO! ✔';
     saveProfileBtn.style.background = 'linear-gradient(135deg, var(--neon-green) 0%, #17b978 100%)';
     saveProfileBtn.style.boxShadow = '0 0 15px var(--neon-green)';
@@ -137,7 +99,6 @@ function zapiszProfil() {
     wczytajLeaderboard();
 }
 
-// Obsługa kliknięcia w wybór awatara
 avatarOpts.forEach(opt => {
     opt.addEventListener('click', () => {
         avatarOpts.forEach(o => o.classList.remove('active'));
@@ -164,56 +125,70 @@ searchInput.addEventListener('input', (e) => {
     });
 });
 
-// 4. Tablica Wyników (Leaderboard)
-function wczytajLeaderboard() {
-    leaderboardBody.innerHTML = '';
-    
-    // Sprawdzenie lokalnych punktów użytkownika, jeśli grał
-    const lokalnePunkty = localStorage.getItem(`arcade_score_${selectedGameTab}`);
-    
-    let scoresList = [...(leaderboardMockData[selectedGameTab] || [])];
+function pokazKomunikatLeaderboarda(tekst) {
+    leaderboardBody.innerHTML = `
+        <tr>
+            <td colspan="3" style="text-align:center;padding:20px;color:var(--text-muted);">
+                ${tekst}
+            </td>
+        </tr>
+    `;
+}
 
-    // Jeśli gracz ma zapisany wynik, wstrzyknij go na odpowiednie miejsce w tabeli
-    if (lokalnePunkty) {
-        const punktyVal = parseInt(lokalnePunkty, 10);
-        // Sprawdzamy czy już istnieje na liście
-        const istnieje = scoresList.some(item => item.name === currentNickname);
-        if (!istnieje) {
-            scoresList.push({
-                name: currentNickname + ' (Ty)',
-                avatar: currentAvatar,
-                score: punktyVal
-            });
+function wstawWierszRankingu(gracz, index) {
+    const rank = index + 1;
+    let rankClass = '';
+
+    if (rank === 1) rankClass = 'rank-1';
+    else if (rank === 2) rankClass = 'rank-2';
+    else if (rank === 3) rankClass = 'rank-3';
+
+    const toTy = gracz.name.replace(' (Ty)', '') === currentNickname;
+    const wyswietlanaNazwa = toTy ? `${gracz.name.replace(' (Ty)', '')} (Ty)` : gracz.name;
+
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td class="rank-col ${rankClass}">${rank}</td>
+        <td>
+            <div class="player-cell">
+                <span class="player-avatar">${gracz.avatar}</span>
+                <span class="player-name">${wyswietlanaNazwa}</span>
+            </div>
+        </td>
+        <td class="score-cell">${gracz.score} pkt</td>
+    `;
+    leaderboardBody.appendChild(row);
+}
+
+// 4. Tablica Wyników (Leaderboard) — wspólna przez backend Render
+async function wczytajLeaderboard() {
+    pokazKomunikatLeaderboarda('Ładowanie rankingu...');
+
+    let scoresList = [];
+
+    try {
+        const odpowiedz = await fetch(`${API_URL}/api/leaderboard/${selectedGameTab}`);
+        if (odpowiedz.ok) {
+            const dane = await odpowiedz.json();
+            scoresList = Array.isArray(dane.wyniki) ? dane.wyniki : [];
         }
+    } catch {
+        pokazKomunikatLeaderboarda('Serwer offline — nie można pobrać wspólnego rankingu.');
+        return;
     }
 
-    // Sortowanie wyników od najwyższego
-    scoresList.sort((a, b) => b.score - a.score);
+    if (scoresList.length === 0) {
+        pokazKomunikatLeaderboarda('Brak wyników dla tej gry. Bądź pierwszy!');
+        return;
+    }
+
+    leaderboardBody.innerHTML = '';
 
     scoresList.forEach((gracz, index) => {
-        const rank = index + 1;
-        let rankClass = '';
-        
-        if (rank === 1) rankClass = 'rank-1';
-        else if (rank === 2) rankClass = 'rank-2';
-        else if (rank === 3) rankClass = 'rank-3';
-
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td class="rank-col ${rankClass}">${rank}</td>
-            <td>
-                <div class="player-cell">
-                    <span class="player-avatar">${gracz.avatar}</span>
-                    <span class="player-name">${gracz.name}</span>
-                </div>
-            </td>
-            <td class="score-cell">${gracz.score} pkt</td>
-        `;
-        leaderboardBody.appendChild(row);
+        wstawWierszRankingu(gracz, index);
     });
 }
 
-// Obsługa zakładek w Leaderboard
 tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
         tabButtons.forEach(b => b.classList.remove('active'));
@@ -247,12 +222,11 @@ function aktualizujLicznikGier() {
     }
 }
 
-// Inicjalizacja
 wczytajProfil();
 sprawdzSerwer();
 odswiezZegar();
 aktualizujLicznikGier();
 
-// Interwały
 setInterval(odswiezZegar, 1000);
-setInterval(sprawdzSerwer, 10000); // sprawdzaj status serwera co 10 sekund
+setInterval(sprawdzSerwer, 10000);
+setInterval(wczytajLeaderboard, 15000);

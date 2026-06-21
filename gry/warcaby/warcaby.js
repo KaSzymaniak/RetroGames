@@ -1,4 +1,5 @@
 import { API_URL } from '../../frontend/config.js';
+import { wyslijWynikNaSerwer } from '../../frontend/scores-api.js';
 
 // ═══════════════════════════════════════════════════
 //   WARCABY — Pełna logika gry
@@ -270,6 +271,12 @@ function endGame(winner) {
         showStatus('🤝 Remis! Żadna ze stron nie ma ruchów.', 'info');
         if (score > 0) saveBtn.disabled = false;
     }
+
+    const best = parseInt(localStorage.getItem('arcade_score_warcaby') || '0', 10);
+    if (score > best) {
+        localStorage.setItem('arcade_score_warcaby', score);
+        wyslijWynikNaSerwer('Warcaby', score).catch(() => {});
+    }
 }
 
 // ─── Sztuczna inteligencja ─────────────────────────
@@ -496,25 +503,14 @@ async function saveScore() {
     saveMsgEl.textContent = 'Wysyłanie wyniku...';
     saveMsgEl.style.color = 'var(--neon-amber)';
 
-    const best = parseInt(localStorage.getItem('arcade_score_warcaby') || '0', 10);
-    if (score > best) localStorage.setItem('arcade_score_warcaby', score);
-
     try {
-        const res = await fetch(`${API_URL}/api/zapisz-wynik`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                gra: 'Warcaby',
-                punkty: score,
-                gracz: `${playerAvatar} ${playerName}`
-            })
-        });
-        const data = await res.json();
+        const data = await wyslijWynikNaSerwer('Warcaby', score);
         saveMsgEl.textContent = '✅ ' + data.message;
         saveMsgEl.style.color = 'var(--neon-green)';
     } catch {
-        saveMsgEl.textContent = score > best ? '💾 Nowy rekord zapisany lokalnie!' : '💾 Wynik zapisany lokalnie.';
-        saveMsgEl.style.color = 'var(--neon-amber)';
+        saveMsgEl.textContent = '❌ Serwer offline — spróbuj ponownie później.';
+        saveMsgEl.style.color = 'var(--neon-red)';
+        saveBtn.disabled = false;
     }
 }
 
