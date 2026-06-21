@@ -2,4 +2,4 @@ const isLocalhost = window.location.hostname === 'localhost' || window.location.
 
 export const API_URL = isLocalhost
     ? 'http://localhost:3000'
-    : 'https://link do rendera.com';
+    : 'https://retrogames-9izf.onrender.com';
