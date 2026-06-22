@@ -3,67 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gra Saper - Retro Arcade</title>
+    <title>Saper - Retro Arcade</title>
     <link rel="stylesheet" href="saper.css">
-    <!-- Dodanie ikon FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="crt-overlay"></div>
-    
-    <div class="game-container">
-        <!-- Back Button -->
+    <div class="page-wrap">
         <a href="../../frontend/index.html" class="back-btn">
             <i class="fa-solid fa-arrow-left"></i> Wróć do Lobby
         </a>
-        
-        <!-- Game Header -->
-        <header class="game-header">
-            <h1 class="game-title">💣 Saper</h1>
-            <p class="game-subtitle">Tryb Klasyczny &bull; Wyzwanie Saperów</p>
-        </header>
 
-        <!-- Main Game Panel -->
-        <div class="glass-card">
-            
-            <!-- Player mini badge -->
-            <div class="player-badge" id="player-badge">
-                <span class="badge-avatar" id="badge-avatar">👾</span>
-                <span class="badge-name" id="badge-name">Anonim</span>
+        <div class="player-badge" id="player-badge">
+            <span class="badge-avatar" id="badge-avatar">👾</span>
+            <span class="badge-name" id="badge-name">Anonim</span>
+        </div>
+
+        <!-- Okno w stylu Windows XP -->
+        <div class="win-window" id="win-window" data-theme="dark">
+            <div class="win-titlebar">
+                <span class="win-titlebar-icon">💣</span>
+                <span class="win-titlebar-text">Saper</span>
             </div>
 
-            <!-- Game board placeholder -->
-            <div class="board-container">
-                <div class="retro-board-placeholder">
-                    <i class="fa-solid fa-burst bomb-icon"></i>
-                    <p class="placeholder-text">Miejsce na planszę z grą...</p>
-                    <p class="desc-text">Osoba od gry Saper wstawi tu właściwy kod planszy i logiki.</p>
+            <div class="win-menubar">
+                <div class="win-menu">
+                    <button class="win-menu-btn" id="menu-gra">Gra</button>
+                    <div class="win-dropdown" id="dropdown-gra">
+                        <button data-diff="beginner">Początkujący (9×9)</button>
+                        <button data-diff="intermediate">Średni (16×16)</button>
+                        <button data-diff="expert">Ekspert (30×16)</button>
+                        <hr>
+                        <button id="menu-new-game">Nowa gra</button>
+                    </div>
+                </div>
+                <div class="win-menu">
+                    <button class="win-menu-btn" id="menu-opcje">Opcje</button>
+                    <div class="win-dropdown" id="dropdown-opcje">
+                        <button data-theme="light"><i class="fa-solid fa-sun"></i> Motyw jasny</button>
+                        <button data-theme="dark"><i class="fa-solid fa-moon"></i> Motyw ciemny</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Testing controls -->
-            <div class="controls-panel">
-                <p class="panel-desc">Użyj poniższego przycisku, aby przetestować integrację z bazą danych i zaktualizować swój wynik w lobby:</p>
-                <button id="win-btn" class="neon-btn pink-neon">
-                    <i class="fa-solid fa-trophy"></i> Symuluj wygraną (+100 pkt)
-                </button>
-                <p id="msg" class="status-msg"></p>
-            </div>
+            <div class="win-body">
+                <div class="win-statusbar">
+                    <div class="led-display" id="mine-counter">010</div>
+                    <button class="face-btn" id="face-btn" title="Nowa gra">🙂</button>
+                    <div class="led-display" id="timer">000</div>
+                </div>
 
+                <div class="board-frame">
+                    <div class="board-grid" id="board-grid"></div>
+                </div>
+
+                <div class="win-footer">
+                    <span id="status-text">Kliknij pole, aby rozpocząć.</span>
+                    <span id="diff-label">Początkujący</span>
+                </div>
+            </div>
         </div>
+
+        <p id="score-msg" class="score-msg"></p>
     </div>
 
-    <!-- Skrypt typu module -->
     <script type="module" src="saper.js"></script>
-    <script type="module">
-        // Wyświetlanie aktualnego profilu gracza w grze Saper
-        function odswiezProfilGracza() {
-            const nick = localStorage.getItem('arcade_nickname') || 'Anonim';
-            const avatar = localStorage.getItem('arcade_avatar') || '👾';
-            document.getElementById('badge-name').innerText = nick;
-            document.getElementById('badge-avatar').innerText = avatar;
-        }
-        odswiezProfilGracza();
-    </script>
 </body>
 </html>
